@@ -23,7 +23,6 @@ class TravelsTableSeeder extends Seeder
             $travel->end_date = $faker->dateTimeBetween($startDate = '-30 days', $endDate = $travel->start_date, $timezone = null);
 
             $random_number= rand(0,1);
-
             if($random_number==1){
                 $travel->type = "all inclusive";
             }else{
