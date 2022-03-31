@@ -16,16 +16,16 @@ class CreateTravelsTable extends Migration
         Schema::create('travels', function (Blueprint $table) {
             $table->id();
 
-            $table->string("travel_name", 50);
+            $table->string("travel_id", 10);
             $table->string("resort_name", 30);
-            $table->tinyInteger("resort_rating");
-            $table->date("start_date");
+            $table->decimal("resort_rating", 3, 1); //punteggio da 1 a 5
+            $table->string("start_date");
             // $table->date("end_date"); //simulo colonna dimenticata
             $table->string("type", 30); //mezza pensione, tutto incluso
             $table->decimal("amount", 7, 2);
             $table->string("city", 30);
-            $table->geometry("position");
-            $table->tinyInteger("travel_rating");
+            $table->string("position", 30);
+            $table->tinyInteger("travel_rating"); //punteggio da 0 a 10 senza mezzi valori
             $table->boolean("passport");
             $table->boolean("travel_included");
             
