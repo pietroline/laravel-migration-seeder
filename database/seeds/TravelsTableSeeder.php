@@ -2,7 +2,7 @@
 
 use App\Travel;
 use Illuminate\Database\Seeder;
-
+use Faker\Generator as Faker;
 class TravelsTableSeeder extends Seeder
 {
     /**
@@ -10,23 +10,34 @@ class TravelsTableSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(Faker $faker)
     {
-        $travel = new Travel();
+        for($i=0; $i<10; $i++){
 
-        $travel->travel_id = "25dfs324df";
-        $travel->resort_name = "Plumeria Hotel";
-        $travel->resort_rating = 4.6;
-        $travel->start_date = date("2022-05-05");
-        $travel->end_date = date("2022-05-15");
-        $travel->type = "all inclusive";
-        $travel->amount = 1799.99;
-        $travel->city = "Maldive";
-        $travel->position = "6.894726 Nord 73.126832 Est";
-        $travel->travel_rating = 8;
-        $travel->passport = true;
-        $travel->travel_included = true;
+            $travel = new Travel();
 
-        $travel->save();
+            $travel->travel_id = $faker->isbn10;
+            $travel->resort_name = $faker->firstName . "'s Hotel";
+            $travel->resort_rating = $faker->randomFloat($nbMaxDecimals = 1, $min = 1, $max = 5);
+            $travel->start_date = $faker->dateTimeBetween($startDate = '-30 days', $endDate = "now", $timezone = null);
+            $travel->end_date = $faker->dateTimeBetween($startDate = '-30 days', $endDate = $travel->start_date, $timezone = null);
+
+            $random_number= rand(0,1);
+
+            if($random_number==1){
+                $travel->type = "all inclusive";
+            }else{
+                $travel->type = "mezza pensione";
+            }
+
+            $travel->amount =  $faker->randomFloat($nbMaxDecimals = 2, $min = 1, $max = 10000);
+            $travel->city = $faker->city;
+            $travel->travel_rating = $faker->numberBetween($min = 1, $max = 10);
+            $travel->passport = $faker->boolean;
+            $travel->travel_included = $faker->boolean;
+    
+            $travel->save();
+
+        }
     }
 }

@@ -24,7 +24,6 @@ class CreateTravelsTable extends Migration
             $table->string("type", 30); //mezza pensione, tutto incluso
             $table->decimal("amount", 7, 2);
             $table->string("city", 30);
-            $table->string("position", 30);
             $table->tinyInteger("travel_rating"); //punteggio da 0 a 10 senza mezzi valori
             $table->boolean("passport");
             $table->boolean("travel_included");
